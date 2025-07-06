@@ -20,7 +20,8 @@
       ],
       "@employee-tax/employee-list": [
         "libs/features/employee-list/src/index.ts"
-      ]
+      ],
+      "@employee-tax/table": ["libs/shared/components/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
