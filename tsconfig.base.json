@@ -14,7 +14,14 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@employee-tax/employee-details": [
+        "libs/features/employee-details/src/index.ts"
+      ],
+      "@employee-tax/employee-list": [
+        "libs/features/employee-list/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
