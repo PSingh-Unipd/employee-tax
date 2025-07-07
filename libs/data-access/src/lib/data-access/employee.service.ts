@@ -7,7 +7,7 @@ import { IEmployee, IEmployeeDetails } from '../models/employee.interface';
 
 @Injectable()
 export class EmployeeService implements IEmployeeService {
-  private useMockFeatureFlag = true;
+  private useMockFeatureFlag = false;
 
   constructor(
     private apiService: EmployeeApiService,

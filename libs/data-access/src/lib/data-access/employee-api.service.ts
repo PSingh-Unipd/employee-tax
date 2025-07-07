@@ -7,7 +7,7 @@ import { IEmployeeService } from '../models/employee-service.interface';
 @Injectable()
 export class EmployeeApiService implements IEmployeeService {
   private http = inject(HttpClient);
-  private baseUrl = '/api/employees';
+  private baseUrl = 'http://localhost:5013/api/employees';
 
   getAll(): Observable<IEmployee[]> {
     return this.http.get<IEmployee[]>(this.baseUrl);
