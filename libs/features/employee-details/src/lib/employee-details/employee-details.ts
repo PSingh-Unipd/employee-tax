@@ -8,9 +8,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { BannerComponent } from '@employee-tax/table';
-import { EmployeeService } from '@employee-tax/data-access';
 import { IEmployeeDetails } from '@employee-tax/data-access';
-import { firstValueFrom } from 'rxjs';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { EmployeeDetailsStore } from '../store/employee-details.store';
 
 @Component({
   selector: 'lib-employee-details',
@@ -26,11 +26,17 @@ import { firstValueFrom } from 'rxjs';
     MatInputModule,
     MatDividerModule,
     BannerComponent,
+    ReactiveFormsModule,
   ],
+  providers: [EmployeeDetailsStore],
 })
 export class EmployeeDetails {
   private route = inject(ActivatedRoute);
-  private employeeService = inject(EmployeeService);
+  public store = inject(EmployeeDetailsStore);
+  salaryControl = new FormControl<number>(0, [
+    Validators.required,
+    Validators.min(1),
+  ]);
 
   employee = signal<IEmployeeDetails | null>(null);
 
@@ -38,13 +44,25 @@ export class EmployeeDetails {
     effect(() => {
       const id = this.route.snapshot.paramMap.get('id');
       if (id) {
-        this.loadEmployee(id);
+        this.store.loadById(id);
+      }
+    });
+
+    effect(() => {
+      const employee = this.store.employee();
+      if (employee) {
+        this.salaryControl.setValue(employee.grossAnnualSalary, {
+          emitEvent: false,
+        });
       }
     });
   }
 
-  private async loadEmployee(id: string) {
-    const data = await firstValueFrom(this.employeeService.getById(id));
-    this.employee.set(data);
+  updateSalary() {
+    const employee = this.store.employee();
+    const salary = this.salaryControl.value;
+    if (employee && salary && salary !== employee.grossAnnualSalary) {
+      this.store.updateSalary(employee.id, salary);
+    }
   }
 }

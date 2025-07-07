@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-md-9">
         <div class="mat-elevation-z8">
-          @let emp = employees | async; @if(emp) {
+          @let emp = employees(); @if(emp) {
           <app-table
             [tableData]="emp"
             [tableColumns]="columns"

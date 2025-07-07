@@ -19,7 +19,7 @@ export class EmployeeApiService implements IEmployeeService {
 
   updateSalary(id: string, newSalary: number): Observable<IEmployeeDetails> {
     return this.http.put<IEmployeeDetails>(`${this.baseUrl}/${id}/salary`, {
-      grossAnnualSalary: newSalary,
+      newSalary: newSalary,
     });
   }
 }
