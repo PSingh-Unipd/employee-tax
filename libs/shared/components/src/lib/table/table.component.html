@@ -1,19 +1,21 @@
-@if(dataSource) {
+@if (dataSource) {
 <table mat-table [dataSource]="dataSource" [fixedLayout]="false">
-  @for (column of tableColumns(); track column.objKey) {
+  @for (column of tableColumns(); track column) {
   <ng-container [matColumnDef]="column.objKey">
     <th mat-header-cell *matHeaderCellDef>{{ column.displayHeader }}</th>
-    <td mat-cell *matCellDef="let element">{{ element[column.objKey] }}</td>
-  </ng-container>
-  }
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let row">
-      <ng-content></ng-content>
+    <td mat-cell *matCellDef="let element">
+      @if (column.type !== 'actions') {
+      {{ element[column.objKey] }}
+      } @else { @for (action of column.actions; track action) {
+      <button mat-icon-button (click)="handleAction(action, element)">
+        <mat-icon>{{ action.icon || 'more_vert' }}</mat-icon>
+      </button>
+      } }
     </td>
   </ng-container>
+  }
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns(); sticky: true"></tr>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns()"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns()"></tr>
 </table>
 

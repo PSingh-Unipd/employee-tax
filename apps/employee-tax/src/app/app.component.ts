@@ -2,13 +2,20 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
+import { HttpClientModule } from '@angular/common/http';
+import {
+  EmployeeApiService,
+  EmployeeMockService,
+  EmployeeService,
+} from '@employee-tax/data-access';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  imports: [RouterModule, NavbarComponent, FooterComponent],
+  imports: [RouterModule, NavbarComponent, FooterComponent, HttpClientModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [EmployeeService, EmployeeApiService, EmployeeMockService],
 })
 export class AppComponent {
   protected title = 'incame-tax-calculator-app';

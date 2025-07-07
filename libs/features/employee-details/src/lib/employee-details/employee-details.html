@@ -1,6 +1,8 @@
 <div class="details-page">
   <app-banner title="Employee Tax Details"></app-banner>
 
+  @let emp = employee(); 
+  @if ( emp) {
   <div class="container page">
     <div class="row">
       <div class="col-md-9">
@@ -10,7 +12,7 @@
             style="max-width: 400px; margin: auto"
           >
             <mat-card-title class="employee-name">
-              {{ employee.firstName }} {{ employee.lastName }}
+              {{ emp.firstName }} {{ emp.lastName }}
             </mat-card-title>
 
             <mat-card-subtitle
@@ -23,7 +25,7 @@
               "
             >
               <label for="grossSalaryInput" style="font-weight: 600"
-                >Gross Annual Salary: {{employee.grossAnnualSalary}}</label
+                >Gross Annual Salary: {{emp.grossAnnualSalary}}</label
               >
             </mat-card-subtitle>
 
@@ -33,39 +35,37 @@
               <mat-list-item>
                 <span class="label">Gross Annual Salary:</span>
                 <span class="value"
-                  >£ {{ employee.grossAnnualSalary | number:'1.0-2' }}</span
+                  >£ {{ emp.grossAnnualSalary | number:'1.0-2' }}</span
                 >
               </mat-list-item>
               <mat-list-item>
                 <span class="label">Gross Monthly Salary:</span>
                 <span class="value"
-                  >£ {{ (employee.grossAnnualSalary / 12) | number:'1.2-2'
-                  }}</span
+                  >£ {{ (emp.grossAnnualSalary / 12) | number:'1.2-2' }}</span
                 >
               </mat-list-item>
               <mat-list-item>
                 <span class="label">Net Annual Salary:</span>
                 <span class="value"
-                  >£ {{ employee.netAnnualSalary | number:'1.0-2' }}</span
+                  >£ {{emp.netAnnualSalary | number:'1.0-2' }}</span
                 >
               </mat-list-item>
               <mat-list-item>
                 <span class="label">Net Monthly Salary:</span>
                 <span class="value"
-                  >£ {{ (employee.netAnnualSalary / 12) | number:'1.2-2'
-                  }}</span
+                  >£ {{ (emp.netAnnualSalary / 12) | number:'1.2-2' }}</span
                 >
               </mat-list-item>
               <mat-list-item>
                 <span class="label">Annual Tax Paid:</span>
                 <span class="value"
-                  >£ {{ employee.annualTaxPaid | number:'1.2-2' }}</span
+                  >£ {{ emp.annualTaxPaid | number:'1.2-2' }}</span
                 >
               </mat-list-item>
               <mat-list-item>
                 <span class="label">Monthly Tax Paid:</span>
                 <span class="value"
-                  >£ {{ (employee.annualTaxPaid / 12) | number:'1.2-2' }}</span
+                  >£ {{ (emp.annualTaxPaid / 12) | number:'1.2-2' }}</span
                 >
               </mat-list-item>
             </mat-list>
@@ -74,4 +74,5 @@
       </div>
     </div>
   </div>
+  }
 </div>

@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@employee-tax/data-access": ["libs/data-access/src/index.ts"],
       "@employee-tax/employee-details": [
         "libs/features/employee-details/src/index.ts"
       ],
