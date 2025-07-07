@@ -9,8 +9,9 @@ import {
 import { MatButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
+import { MatTableModule } from '@angular/material/table';
 
 export type ColumnType = 'text' | 'actions';
 
@@ -39,13 +40,11 @@ export type TableColumn<T> = TextColumn<T> | ActionColumn<T>;
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
-  standalone: true,
   imports: [
-    MatPaginator,
     MatTableModule,
+    MatPaginator,
     RouterModule,
     MatIconModule,
-    MatButton,
   ],
 })
 export class TableComponent<T> implements AfterViewInit {
