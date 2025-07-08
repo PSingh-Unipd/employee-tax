@@ -8,6 +8,7 @@ import {
   EmployeeMockService,
   EmployeeService,
 } from '@employee-tax/data-access';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,12 @@ import {
   styleUrl: './app.component.scss',
   imports: [RouterModule, NavbarComponent, FooterComponent, HttpClientModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [EmployeeService, EmployeeApiService, EmployeeMockService],
+  providers: [
+    EmployeeService,
+    EmployeeApiService,
+    EmployeeMockService,
+    BrowserModule,
+  ],
 })
 export class AppComponent {
   protected title = 'incame-tax-calculator-app';

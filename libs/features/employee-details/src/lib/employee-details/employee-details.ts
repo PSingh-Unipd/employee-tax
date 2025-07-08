@@ -9,8 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { BannerComponent } from '@employee-tax/table';
 import { IEmployeeDetails } from '@employee-tax/data-access';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EmployeeDetailsStore } from '../store/employee-details.store';
+import { EmployeeSalaryUpdate } from '../employee-salary-update/employee-salary-update';
 
 @Component({
   selector: 'lib-employee-details',
@@ -26,19 +26,17 @@ import { EmployeeDetailsStore } from '../store/employee-details.store';
     MatInputModule,
     MatDividerModule,
     BannerComponent,
-    ReactiveFormsModule,
+    EmployeeSalaryUpdate,
   ],
   providers: [EmployeeDetailsStore],
 })
 export class EmployeeDetails {
   private route = inject(ActivatedRoute);
   public store = inject(EmployeeDetailsStore);
-  salaryControl = new FormControl<number>(0, [
-    Validators.required,
-    Validators.min(1),
-  ]);
 
   employee = signal<IEmployeeDetails | null>(null);
+
+  isEditingSalary = signal(false);
 
   constructor() {
     effect(() => {
@@ -47,22 +45,16 @@ export class EmployeeDetails {
         this.store.loadById(id);
       }
     });
-
-    effect(() => {
-      const employee = this.store.employee();
-      if (employee) {
-        this.salaryControl.setValue(employee.grossAnnualSalary, {
-          emitEvent: false,
-        });
-      }
-    });
   }
 
-  updateSalary() {
+  updateSalary(event: number): void {
     const employee = this.store.employee();
-    const salary = this.salaryControl.value;
-    if (employee && salary && salary !== employee.grossAnnualSalary) {
-      this.store.updateSalary(employee.id, salary);
+    if (employee && event) {
+      this.store.updateSalary(employee.id, event);
     }
+  }
+
+  toggleSalaryEdit() {
+    this.isEditingSalary.update((prev) => !prev);
   }
 }

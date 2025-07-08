@@ -1,0 +1,11 @@
+<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px">
+  <input
+    matInput
+    type="number"
+    [formControl]="salaryControl"
+    placeholder="Enter new salary"
+  />
+  <button (click)="updateSalary()" [disabled]="salaryControl.invalid">
+    Update
+  </button>
+</div>

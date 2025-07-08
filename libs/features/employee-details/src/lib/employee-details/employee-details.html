@@ -13,36 +13,17 @@
               {{ emp.firstName }} {{ emp.lastName }}
             </mat-card-title>
 
-            <mat-card-subtitle
-              class="gross-salary-edit"
-              style="
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                margin-bottom: 16px;
-              "
-            >
-              <label for="grossSalaryInput" style="font-weight: 600"
-                >Gross Annual Salary: £{{emp.grossAnnualSalary}}</label
-              >
-            </mat-card-subtitle>
-            <div
-              style="
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                margin-bottom: 16px;
-              "
-            >
-              <input
-                matInput
-                type="number"
-                [formControl]="salaryControl"
-                placeholder="Enter new salary"
-              />
-              <button (click)="updateSalary()">Update</button>
-            </div>
+            <mat-card-subtitle class="gross-salary">
+              <label>Gross Annual Salary: £{{emp.grossAnnualSalary}}</label>
 
+              <mat-icon (click)="toggleSalaryEdit()">edit</mat-icon>
+            </mat-card-subtitle>
+            @if (this.isEditingSalary()) {
+            <lib-employee-salary-update
+              [salary]="emp.grossAnnualSalary"
+              (salaryUpdated)="updateSalary($event)"
+            ></lib-employee-salary-update>
+            }
             <mat-divider></mat-divider>
 
             <mat-list>

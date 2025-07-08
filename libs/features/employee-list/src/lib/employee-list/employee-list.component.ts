@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal, effect } from '@angular/core';
+import { Component, inject, effect } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { BannerComponent, TableColumn } from '@employee-tax/table';
 import { IEmployee } from '@employee-tax/data-access';
