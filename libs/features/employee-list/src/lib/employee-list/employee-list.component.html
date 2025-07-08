@@ -3,6 +3,17 @@
   <div class="container">
     <div class="row">
       <div class="col-md-9">
+        <mat-form-field
+          appearance="outline"
+          style="width: 100%; margin-bottom: 16px"
+        >
+          <mat-label>Search by name</mat-label>
+          <input
+            matInput
+            [formControl]="searchControl"
+            placeholder="e.g. John"
+          />
+        </mat-form-field>
         <div class="mat-elevation-z8">
           @let emp = employees(); @if(emp) {
           <app-table
