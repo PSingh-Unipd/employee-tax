@@ -1,19 +1,43 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { NavbarComponent } from './layout/navbar/navbar.component';
+import { FooterComponent } from './layout/footer/footer.component';
+import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import {
+  EmployeeApiService,
+  EmployeeMockService,
+  EmployeeService,
+} from '@employee-tax/data-access';
+import { RouterTestingModule } from '@angular/router/testing';
 
-describe('App', () => {
+describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent],
+      imports: [
+        AppComponent,
+        NavbarComponent,
+        FooterComponent,
+        RouterModule,
+        HttpClientModule,
+        BrowserModule,
+        RouterTestingModule,
+      ],
+      providers: [EmployeeService, EmployeeApiService, EmployeeMockService],
     }).compileComponents();
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain(
-      'Welcome incame-tax-calculator-app'
-    );
+  });
+
+  it('should create the app', () => {
+    expect(component).toBeTruthy();
   });
 });
